@@ -3,6 +3,13 @@ import turtle, time, random
 SCREEN_WIDTH, SCREEN_HEIGHT = 700, 600  # constants : specifying the race screen size
 COLORS = ['red', 'blue', 'green', 'yellow', 'orange', 'black', 'brown', 'pink', 'purple', 'cyan']
 
+def init_turtle():
+	"""Function that creates the space track and gets it set for a race."""
+	screen = turtle.Screen()
+	screen.setup(SCREEN_WIDTH, SCREEN_HEIGHT)
+	screen.title('Turtle Dash!')
+
+
 def number_of_racers():
 	"""Function that accepts the user choice of number of turtles to race. If input is not an integer, user is prompted for a good input."""
 	racers = 0
@@ -21,18 +28,6 @@ def number_of_racers():
 		else:
 			print('\nNumber not in range 2-10. Try Again!')
 
-def race(colors):
-	"""Function that receives the colored turtles as parameters and races them."""
-	turtles = create_turtles(colors)
-
-	while True:
-		for racer in turtles:
-			distance = random.randrange(1, 20)
-			racer.forward(distance)
-
-			x, y = racer.pos()
-			if y >= SCREEN_HEIGHT // 2 - 10:
-				return colors[turtles.index(racer)]
 
 def create_turtles(colors):
 	"""Function that creates turtles as per the user input and positions them, equally spreading through the given space track."""
@@ -50,11 +45,20 @@ def create_turtles(colors):
 
 	return turtles
 
-def init_turtle():
-	"""Function that creates the space track and gets it set for a race."""
-	screen = turtle.Screen()
-	screen.setup(SCREEN_WIDTH, SCREEN_HEIGHT)
-	screen.title('Turtle Dash!')
+
+def race(colors):
+	"""Function that receives the colored turtles as parameters and races them."""
+	turtles = create_turtles(colors)
+
+	while True:
+		for racer in turtles:
+			distance = random.randrange(1, 20)
+			racer.forward(distance)
+
+			x, y = racer.pos()
+			if y >= SCREEN_HEIGHT // 2 - 10:
+				return colors[turtles.index(racer)]
+
 
 def main():
 	"""The main function."""
